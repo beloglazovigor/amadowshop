@@ -1,0 +1,71 @@
+{% load staticfiles %}
+<nav class="amado-nav">
+    <ul>
+        <li class="{% if request.resolver_match.url_name == 'main' %}active{% endif %}">
+            <a href="{% url 'main' %}">Home</a></li>
+        <li class="{% if request.resolver_match.kwargs.pk == '0' %}active{% endif %}">
+            <a href="{% url 'products:category' 0 %}">Shop</a></li>
+        <li class="{% if request.resolver_match.url_name == 'checkout' %}active{% endif %}">
+            <a href="#">Checkout</a></li>
+    </ul>
+
+    {% if user.is_authenticated %}
+    <li>
+        <div class="dropdown">
+            <a class="dropdown-toggle" href="" data-toggle="dropdown">
+                {{ user.first_name|default:'user' }}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{% url 'auth:edit' %}">Profile</a>
+                </li>
+                <li>
+                    <a href="{% url 'orderapp:orders_list' %}">Orders</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    {% endif %}
+    {% if user.is_superuser %}
+    <li>
+        <a href="{% url 'myadmin:users' %}">Admin Panel</a>
+    </li>
+    {% endif %}
+    <li>
+        {% if user.is_authenticated %}
+        <a href="{% url 'auth:logout' %}">logout</a>
+        {% else %}
+        <a href="{% url 'auth:login' %}">login</a>
+        {% endif %}
+    </li>
+
+</nav>
+
+<div class="amado-btn-group mt-30 mb-100">
+    <a href="#" class="btn amado-btn mb-15">Sale: {{ hot_product.name }}</a>
+    <a href="#" class="btn amado-btn active">New this week</a>
+</div>
+<!-- Cart Menu -->
+<div class="cart-fav-search mb-100">
+    <a href="{% url 'basket:view' %}" class="cart-nav"><img
+            src="{% static 'img/core-img/cart.png' %}" alt=""> Cart
+        <span>
+            {% if basket %}
+            {{ basket.0.total_cost|floatformat:0 }} $
+            ({{ basket.0.total_quantity }} qt)
+            {% endif %}
+        </span></a>
+    <a href="#" class="fav-nav"><img
+            src="{% static 'img/core-img/favorites.png' %}" alt="">
+        Favourite</a>
+    <a href="#" class="search-nav"><img
+            src="{% static 'img/core-img/search.png' %}" alt=""> Search</a>
+</div>
+<!-- Social Button -->
+<div class="social-info d-flex justify-content-between">
+    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+</div>

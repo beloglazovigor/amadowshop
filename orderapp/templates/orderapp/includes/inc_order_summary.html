@@ -1,0 +1,27 @@
+{% if object %}
+<hr>
+    <div class="h5">Order №{{ object.pk }} at {{ object.created|date:"Y-m-d H:i:s" }}</div>
+    <hr>
+    <div class="h5">User: {{ user.last_name }} {{ user.first_name }} </div>
+    <div class="h5">Update: {{ object.updated|date:"Y-m-d H:i:s" }}</div>
+    <div class="h5">Status: {{ object.get_status_display }}</div>
+    <hr>
+    <div class="h5">
+        Order total quantity: <span class="order_total_quantity">{{ object.get_total_quantity }}</span>
+    </div>
+    <div class="h5">
+        Order total cost: <span class="order_total_cost">{{ object.get_total_cost }}</span> $
+    </div>
+{% else %}
+    <div class="h5">New order</div>
+    <hr>
+    <div class="h5"> {{ user.last_name }} {{ user.first_name }} </div>
+    <hr>
+    <div class="h5">
+        Order total quantity: <span class="order_total_quantity"></span>
+    </div>
+    <div class="h5">
+       Order total cost: <span class="order_total_cost"></span> $
+    </div>
+{% endif %}
+<hr>

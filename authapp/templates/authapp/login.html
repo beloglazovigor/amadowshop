@@ -1,0 +1,65 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+{{ title|title }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main-container">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-40 p-r-40 p-t-40 p-b-30">
+
+            <div class="social-network">
+                <div class="amado-navbar-brand p-b-35">
+                    <a href="{% url 'main' %}"><img
+                            src="{% static 'img/core-img/logo.png' %}"
+                            alt=""></a>
+                </div>
+            </div>
+
+            <form class="login100-form"
+                  action="{% url 'auth:login' %}" method="post">
+
+                {% csrf_token %}
+                
+                {% if next %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+
+                <div class="wrap-input100 m-b-10">
+                    {{ login_form.username }}
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <span class="lnr lnr-user"></span>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 m-b-10">
+                    {{ login_form.password }}
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<span class="lnr lnr-lock"></span>
+                    </span>
+                </div>
+
+                <div class="container-login100-form-btn p-t-15">
+                    <button class="login100-form-btn" type="submit">Login
+                    </button>
+                </div>
+
+            </form>
+
+            <div class="text-center w-full p-t-55">
+                <span class="txt1">Not a member?</span>
+                <a class="txt1 bo1 hov1" href="{% url 'auth:register' %}">Sign
+                    up now</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

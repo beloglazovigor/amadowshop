@@ -1,0 +1,75 @@
+{% extends 'orderapp/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+
+{% block content %}
+{% include 'orderapp/includes/inc_order_summary.html' %}
+
+
+----------------------------------------------------------------
+
+<div class="basket_list">
+
+
+    {% for item in object.orderitems.select_related %}
+    <div class="basket_record">
+        <tr>
+        <td class="cart_product_img">
+                        <a href="#"><img src="{{ item.product.image|media_folder_products }}" alt="{{ item.product.short_desc }}"></a>
+                    </td></tr>
+
+        <!--&lt;!&ndash;<img src="{{ item.product.image|media_folder_products }}"&ndash;&gt;-->
+             <!--&lt;!&ndash;alt="{{ item.product.short_desc }}">&ndash;&gt;-->
+        <!--<span class="category_name">{{ item.product.category.name }}</span>-->
+        <!--<span class="product_name">{{ item.product.name }}</span>-->
+        <!--<span class="product_price">{{ item.product.price }} $ </span>-->
+        <!--<span class="product_quantity">x {{ item.quantity }} qnt</span>-->
+        <!--<span class="product_cost"> = {{ item.get_product_cost }} $ </span>-->
+    </div>
+    {% endfor %}
+</div>
+
+---------------------------------------------------------------
+
+
+{% include 'orderapp/includes/inc_order_actions.html' %}
+
+
+
+    <div class="cart-table clearfix">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in basket_items %}
+                <tr>
+                    <td class="cart_product_img">
+                        <a href="#"><img src="{{ item.product.image|media_folder_products }}" alt="{{ item.product.short_desc }}"></a>
+                    </td>
+                    <td class="cart_product_desc">
+                        <h5>{{ item.product.name }}</h5>
+                    </td>
+                    <td class="price">
+                        <span>$ {{ item.product.price }}</span>
+                    </td>
+                    <td class="qty">
+                        <div class="qty-btn d-flex">
+                            <p>Qty</p>
+                            <input type="number" name="{{ item.pk }}" min="0" value="{{ item.quantity }}">
+                        </div>
+                        <a href="{% url 'basket:remove' item.pk %}" class="">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

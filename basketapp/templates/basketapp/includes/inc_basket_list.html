@@ -1,0 +1,62 @@
+{% load my_tags %}
+<div class="col-12 col-lg-8">
+    <div class="cart-title mt-50">
+        <h2>Your Shopping Cart,
+            {% if user.first_name %}
+            {{ user.first_name|title }}
+            {% else %}
+            User
+            {% endif %}
+        </h2>
+    </div>
+
+    <div class="cart-table clearfix">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in basket_items %}
+                <tr>
+                    <td class="cart_product_img">
+                        <a href="#"><img src="{{ item.product.image|media_folder_products }}" alt="{{ item.product.short_desc }}"></a>
+                    </td>
+                    <td class="cart_product_desc">
+                        <h5>{{ item.product.name }}</h5>
+                    </td>
+                    <td class="price">
+                        <span>$ {{ item.product.price }}</span>
+                    </td>
+                    <td class="qty">
+                        <div class="qty-btn d-flex">
+                            <p>Qty</p>
+                            <input type="number" name="{{ item.pk }}" min="0" value="{{ item.quantity }}">
+                        </div>
+                        <a href="{% url 'basket:remove' item.pk %}" class="">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-12 col-lg-4">
+    <div class="cart-summary">
+        <h5>Cart Total</h5>
+        {% if basket_items %}
+        <ul class="summary-table">
+            <li><span>quantity:</span> <span>{{ basket_items.0.total_quantity }}</span></li>
+            <li><span>delivery:</span> <span>Free</span></li>
+            <li><span>total cost:</span> <span>$ {{ basket_items.0.total_cost }}</span></li>
+        </ul>
+        {% endif %}
+        <div class="cart-btn mt-100">
+            <a href="{% url 'orderapp:order_create' %}" class="btn amado-btn w-100">Checkout</a>
+        </div>
+    </div>
+</div>

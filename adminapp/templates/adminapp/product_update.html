@@ -1,0 +1,24 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+{% load my_tags %}
+<!-- Title  -->
+{% block title %}
+{{ title|title }}
+{% endblock %}
+
+<!-- ##### Main Content Wrapper Start ##### -->
+
+{% block content %}
+<div class="category-update">
+    <br>
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ update_form.as_p }}
+        <input class="form-control" type="submit" value="Save">
+    </form>
+    <br>
+    <div class="amado-btn-group mt-20 mb-100">
+        <center><a href="{% url 'myadmin:categories' %}" class="btn amado-btn mb-15">Back to categories</a></center>
+    </div>
+</div>
+{% endblock %}

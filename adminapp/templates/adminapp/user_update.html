@@ -1,0 +1,19 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+{% load my_tags %}
+<!--    <title>Amado - Furniture Ecommerce Template | Home</title>-->
+{% block title %}
+{{ title|title }}
+{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ update_form.as_p }}
+    <input class="form-control" type="submit" value="Save">
+</form>
+<br>
+<div class="amado-btn-group mt-20 mb-100">
+    <center><a href="{% url 'myadmin:users' %}" class="btn amado-btn mb-15">Back to users</a></center>
+</div>
+{% endblock %}

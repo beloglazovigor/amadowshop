@@ -1,0 +1,24 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+<!-- Title  -->
+{% block title %}
+{{ title|title }}
+{% endblock %}
+
+<!-- ##### Main Content Wrapper Start ##### -->
+{% block content %}
+<div class="user_delete">
+    <br>
+    Are you sure you want to delete this product: 
+    {% if product_to_delete.name %}
+    {{ product_to_delete.name|title }}
+    {% endif %}
+    ?
+    <center><form action="{% url 'myadmin:product_delete' pk=product_to_delete.pk %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="Delete">
+    </form></center>
+    <br>
+    <center><a href="{% url 'myadmin:categories' %}" class="btn amado-btn mb-15">Cancel</a></center>
+</div>
+{% endblock %}

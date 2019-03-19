@@ -1,0 +1,145 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+{% load my_tags %}
+<!-- Title  -->
+{% block title %}
+{{ title|title }}
+{% endblock %}
+
+<!-- ##### Main Content Wrapper Start ##### -->
+{% block content %}
+<!-- Product Details Area Start -->
+<div class="single-product-area section-padding-100 clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-50">
+                        <li class="breadcrumb-item"><a
+                                href="{% url 'myadmin:categories' %}">Back to
+                            categories</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ object.category.name }}
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ object.name|title }}
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-7">
+                <div class="single_product_thumb">
+                    <div id="product_details_slider" class="carousel slide"
+                         data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li class="active"
+                                data-target="#product_details_slider"
+                                data-slide-to="0"
+                                style="background-image: url({% static 'img/product-img/pro-big-1.jpg' %});">
+                            </li>
+                            <li data-target="#product_details_slider"
+                                data-slide-to="1"
+                                style="background-image: url({% static 'img/product-img/pro-big-2.jpg' %});">
+                            </li>
+                            <li data-target="#product_details_slider"
+                                data-slide-to="2"
+                                style="background-image: url({% static 'img/product-img/pro-big-3.jpg' %});">
+                            </li>
+                            <li data-target="#product_details_slider"
+                                data-slide-to="3"
+                                style="background-image: url({% static 'img/product-img/pro-big-4.jpg' %});">
+                            </li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a class="gallery_img"
+                                   href="{{ object.image.url }}">
+                                    <img class="d-block w-100"
+                                         src="{{ object.image.url }}"
+                                         alt="First slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img"
+                                   href="{{ object.image.url }}">
+                                    <img class="d-block w-100"
+                                         src="{{ object.image.url }}"
+                                         alt="Second slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img"
+                                   href="{{ object.image.url }}">
+                                    <img class="d-block w-100"
+                                         src="{{ object.image.url }}"
+                                         alt="Third slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img"
+                                   href="{{ object.image.url }}">
+                                    <img class="d-block w-100"
+                                         src="{{ object.image.url }}"
+                                         alt="Fourth slide">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="single_product_desc">
+                    <!-- Product Meta Data -->
+                    <div class="product-meta-data">
+                        <div class="line"></div>
+                        <p class="product-price">$ {{ object.price }}</p>
+                        <a href="#">
+                            <h6>{{ object.name }}</h6>
+                        </a>
+                        <!-- Ratings & Review -->
+                        <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                            <div class="ratings">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                            <div class="review">
+                                <a href="#">Write A Review</a>
+                            </div>
+                        </div>
+                        <!-- Avaiable -->
+                        <p class="avaibility"><i class="fa fa-circle"></i> In
+                            Stock</p>
+                    </div>
+                    <div class="short_overview my-5">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Aliquid quae eveniet culpa officia quidem
+                            mollitia impedit iste asperiores nisi reprehenderit
+                            consequatur, autem, nostrum pariatur enim?</p>
+                    </div>
+                    <div class="cart-btn d-flex mb-50">
+                        <div class="amado-btn-group mt-30 mb-100">
+                            <a href="{% url 'myadmin:product_update' pk=object.pk %}"
+                               class="btn amado-btn mb-15">Edit</a>
+                        </div>&nbsp;&nbsp;&nbsp;
+                        <div class="amado-btn-group mt-30 mb-100">
+                            <a href="{% url 'myadmin:product_delete' pk=object.pk %}"
+                               class="btn amado-btn mb-15">Delete</a>
+                        </div>&nbsp;&nbsp;&nbsp;
+                        <div class="amado-btn-group mt-30 mb-100">
+                            <a href="{% url 'myadmin:products' pk=object.category.pk %}"
+                               class="btn amado-btn mb-15">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Details Area End -->
+{% endblock %}
+

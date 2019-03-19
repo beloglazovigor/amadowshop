@@ -1,0 +1,58 @@
+{% extends 'orderapp/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block content %}
+
+<div class="cart-table-area section-padding-100">
+    <!--<div class="container-fluid">-->
+    <!--<div class="row">-->
+    <div class="col-10 col-lg-8">
+        <!--<div class="cart-table clearfix">-->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Picture</th>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total cost</th>
+            </tr>
+            </thead>
+            {% for item in object.orderitems.select_related %}
+            <tbody>
+            <tr>
+                <td class="cart_product_img">
+                    <a href="#"><img
+                            src="{{ item.product.image|media_folder_products }}"
+                            alt="{{ item.product.short_desc }}"></a>
+                </td>
+                <td class="cart_product_desc">
+                    <span class="category_name">{{ item.product.category.name }}</span>
+                </td>
+                <td class="cart_product_desc">
+                    <span class="product_name">{{ item.product.name }}</span>
+                </td>
+                <td class="price">
+                    <span class="product_price">{{ item.product.price }} $ </span>
+                </td>
+                <td class="qty">
+                    <span class="product_quantity">x {{ item.quantity }} qnt</span>
+                </td>
+                <td class="qty">
+                    <span class="product_cost"> = {{ item.get_product_cost }} $ </span>
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        <!--</div>-->
+    </div>
+    <!--</div>-->
+    <!--</div>-->
+    {% include 'orderapp/includes/inc_order_summary.html' %}
+    {% include 'orderapp/includes/inc_order_actions.html' %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="main-container">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-40 p-r-40 p-t-40 p-b-30">
+
+            <div class="social-network">
+                <div class="amado-navbar-brand p-b-35">
+                    <a href="{% url 'main' %}"><img
+                            src="{% static 'img/core-img/logo.png' %}"
+                            alt=""></a>
+                </div>
+                <div class="btn-edit m-b-30">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    Edit
+                </div>
+            </div>
+
+            <form class="login100-form"
+                  action="{% url 'auth:edit' %}" method="post"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="wrap-input100 m-b-10">
+                    {{ edit_form.username }}
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <span class="lnr lnr-user"></span>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 m-b-10">
+                    {{ edit_form.first_name }}
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <span class="lnr lnr-user"></span>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 m-b-10">
+                    {{ edit_form.email }}
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <span class="lnr lnr-envelope"></span>
+                    </span>
+                </div>
+
+                <div class="container-login100-form-btn p-t-15">
+                    <button class="login100-form-btn" type="submit" value="Save">Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

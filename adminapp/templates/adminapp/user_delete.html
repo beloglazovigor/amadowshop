@@ -1,0 +1,27 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+{% load my_tags %}
+<!--    <title>Amado - Furniture Ecommerce Template | Home</title>-->
+{% block title %}
+{{ title|title }}
+{% endblock %}
+
+{% block content %}
+<div class="user_delete">
+    <br>
+    Are you sure you want to delete
+    {% if user_to_delete.first_name %}
+    {{ user_to_delete.first_name|title }}
+    {% if user_to_delete.last_name %}
+    {{ user_to_delete.last_name|title }}
+    {% endif %}
+    {% endif %}
+    ?
+    <center><form action="{% url 'myadmin:user_delete' pk=user_to_delete.pk %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="Delete">
+    </form></center>
+    <br>
+    <center><a href="{% url 'myadmin:users' %}" class="btn amado-btn mb-15">Cancel</a></center>
+</div>
+{% endblock %}

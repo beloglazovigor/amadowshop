@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<nav class="amado-nav">
+    <ul>
+        <li class="{% if request.resolver_match.url_name == 'main' %}active{% endif %}"><a href="{% url 'main' %}">Home</a></li>
+        <li class="{% if request.resolver_match.url_name == 'users' %}active{% endif %}"><a href="{% url 'myadmin:users' %}">Users</a></li>
+        <li class="{% if request.resolver_match.url_name == 'categories' or category.name %}active{% endif %}"><a href="{% url 'myadmin:categories' %}">Categories
+                {% if category %}
+                :<span>{{ category.name }}</span>
+                {% endif %}
+            </a></li>
+    </ul>
+
+<!--
+    {% if user.is_authenticated %}
+    <li>
+        <a href="{% url 'auth:edit' %}">
+            {{ user.first_name|default:'user' }}
+        </a>
+    </li>
+    {% endif %}
+    <li>
+        {% if user.is_authenticated %}
+        <a href="{% url 'auth:logout' %}">logout</a>
+        {% else %}
+        <a href="{% url 'auth:login' %}">login</a>
+        {% endif %}
+    </li>
+-->
+
+</nav>
+
+
+

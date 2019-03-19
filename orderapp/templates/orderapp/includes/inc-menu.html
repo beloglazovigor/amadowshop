@@ -1,0 +1,42 @@
+{% load static %}
+<nav class="amado-nav">
+    <ul>
+        <li class="{% if request.resolver_match.url_name == 'main' %}active{% endif %}">
+            <a href="{% url 'main' %}">Home</a></li>
+        <li class="{% if request.resolver_match.kwargs.pk == '0' %}active{% endif %}">
+            <a href="{% url 'products:category' 0 %}">Shop</a></li>
+    </ul>
+
+    {% if user.is_authenticated %}
+    <li>
+        <div class="dropdown">
+            <a class="dropdown-toggle" href="" data-toggle="dropdown">
+                {{ user.first_name|default:'user' }}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{% url 'auth:edit' %}">Profile</a>
+                </li>
+                <li>
+                    <a href="{% url 'orderapp:orders_list' %}">Orders</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    {% endif %}
+    {% if user.is_superuser %}
+    <li>
+        <a href="{% url 'myadmin:users' %}">Admin Panel</a>
+    </li>
+    {% endif %}
+    <li>
+        {% if user.is_authenticated %}
+        <a href="{% url 'auth:logout' %}">logout</a>
+        {% else %}
+        <a href="{% url 'auth:login' %}">login</a>
+        {% endif %}
+    </li>
+</nav>
+
+

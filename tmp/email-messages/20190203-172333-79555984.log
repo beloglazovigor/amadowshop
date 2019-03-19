@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Account verification aaaaa
+From: django@amadoshop.local
+To: aaaaaaaaaaaaa@gmail.com
+Date: Sun, 03 Feb 2019 14:23:33 -0000
+Message-ID: <154920381333.2984.15964046858752477269@HOME-PC>
+
+For account verification aaaaa on http://localhost:8000please follow this link /auth/verify/aaaaaaaaaaaaa@gmail.com/aa1ff62eb8cbae810e6cebbb260285ed5f79ff88/
+-------------------------------------------------------------------------------

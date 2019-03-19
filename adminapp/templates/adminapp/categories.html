@@ -1,0 +1,33 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+<!-- Title  -->
+{% block title %}
+{{ title|title }}
+{% endblock %}
+
+<!-- ##### Main Content Wrapper Start ##### -->
+{% block content %}
+<div class="categories_list">
+    <hr>
+    <div class="amado-btn-group mt-10 mb-200">
+        <a href="{% url 'myadmin:category_create' %}"
+           class="btn amado-btn mb-10">Create new category</a>
+    </div>
+    <hr>
+    {% for object in objects %}
+    <div class="category_record{% if not object.is_active %}not_active{% endif %}">
+        <div class="category_name">
+            {{ object.name|title }}
+        </div>
+        <a href="{% url 'myadmin:products' pk=object.pk %}"
+           class="btn amado-btn mb-10">Category of products</a>
+        <a href="{% url 'myadmin:category_update' pk=object.pk %}"
+           class="btn amado-btn mb-10">Edit</a>
+        <a href="{% url 'myadmin:category_delete' pk=object.pk %}"
+           class="btn amado-btn mb-10">Delete</a>
+        <hr>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
